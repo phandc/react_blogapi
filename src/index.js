@@ -2,12 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Header from './components/Header'
+import Footer from './components/Footer'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <React.StrictMode>
+      <Header />
+      <Switch>
+        <Route exact path="" component={App} />
+      </Switch>
+      <Footer />
+    </React.StrictMode>
+  </Router>
+  ,
   document.getElementById('root')
 );
 
