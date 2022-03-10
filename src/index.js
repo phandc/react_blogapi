@@ -2,8 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Header from './components/Header'
-import Footer from './components/Footer'
+import Header from './components/header'
+import Footer from './components/footer'
+import Register from './components/register';
+
+import Login from './components/login';
+import Logout from './components/logout';
+
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 
@@ -12,7 +17,10 @@ ReactDOM.render(
     <React.StrictMode>
       <Header />
       <Switch>
-        <Route exact path="" component={App} />
+        <Route exact path="/" component={App} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
       </Switch>
       <Footer />
     </React.StrictMode>
