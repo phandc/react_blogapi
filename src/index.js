@@ -8,6 +8,7 @@ import Register from './components/register';
 
 import Login from './components/login';
 import Logout from './components/logout';
+import Single from './components/single'
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
+        <Route path="/post/:slug" component={Single} />
       </Switch>
       <Footer />
     </React.StrictMode>
