@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import './App.css'
-import Posts from './components/posts/posts'
+import Posts from './components/admin/posts'
 import PostLoadingComponent from './components/posts/postLoading'
 import axiosInstance from './axios'
 
-function App() {
+function Admin() {
   const PostLoading = PostLoadingComponent(Posts)
   const [appState, setAppState] = useState({
     loading: false,
@@ -13,14 +13,8 @@ function App() {
 
   useEffect(() => {
     setAppState({loading: true});
-    // const apiURL = 'http://127.0.0.1:8000/api/';
-    // fetch(apiURL)
-    //   .then((data) => data.json())
-    //   .then((posts) => {
-    //     setAppState({loading: false, posts:posts})
-    //   })
 
-    axiosInstance.get('/').then((res) => {
+    axiosInstance.get('').then((res) => {
 			const allPosts = res.data;
 			setAppState({loading: false, posts: allPosts})
 			console.log(res.data);
@@ -36,4 +30,4 @@ function App() {
   );
 }
 
-export default App;
+export default Admin;
