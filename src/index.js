@@ -12,17 +12,20 @@ import Single from './components/single'
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
+import Search from './components/search';
 
 ReactDOM.render(
   <Router>
     <React.StrictMode>
       <Header />
       <Switch>
+      
         <Route exact path="/" component={App} />
         <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
+        <Route  path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
-        <Route path="/post/:slug" component={Single} />
+        <Route path="/post/:slug" component={Single} /> 
+        <Route path="/search" component={Search} />
       </Switch>
       <Footer />
     </React.StrictMode>
