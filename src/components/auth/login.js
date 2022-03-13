@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import axiosInstance from '../../axios';
+import axiosInstance from '../axios/login';
 import { useHistory } from 'react-router-dom';
+import FbLogin from 'react-facebook-login'
+import facebookLogin from '../axios/facebookLogin';
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,6 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+;
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -55,20 +58,30 @@ export default function SignIn() {
 		console.log(formData);
 
 		axiosInstance
-			.post('token/', {
-				email: formData.email,
+			.post('auth/token/', {
+				grant_type: 'password',
+				username: formData.email,
 				password: formData.password,
+				client_id: 'ZVEJyiV0b5DxO7gJpfYPVn3KBIDFNjMaKUndB06k',
+				client_secret: 'lKPDwjZRrAupHSHG6eky6gDQYOcR3cWQdfqbACSCIJ0gfbmVj6DgTnNs9W9dlrlx9oZeMENFQO0K7kyNrodJ55F7BO0csxmKm1iD1bKA3BIlGEn9ncsM5c52WibqN81P',
+
 			})
 			.then((res) => {
-				localStorage.setItem('access_token', res.data.access);
-				localStorage.setItem('refresh_token', res.data.refresh);
-				axiosInstance.defaults.headers['Authorization'] =
-					'Bearer ' + localStorage.getItem('access_token'); 
+				console.log(res);
+				localStorage.setItem('access_token', res.data.access_token);
+				localStorage.setItem('refresh_token', res.data.refresh_token);	
 				history.push('/');
+				window.location.reload();
 				//console.log(res);
 				//console.log(res.data);
 			});
 	};
+    
+	const responseFacebook = (response) => {
+		console.log(response);
+		facebookLogin(response.accessToken);
+	};
+
 
 	const classes = useStyles();
 
@@ -119,6 +132,11 @@ export default function SignIn() {
 					>
 						Sign In
 					</Button>
+					<FbLogin
+						appId="500760331592920"
+						fields="name,email,picture"
+						callback={responseFacebook}
+					/>
 					<Grid container>
 						<Grid item xs>
 							<Link href="#" variant="body2">
